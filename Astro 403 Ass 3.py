@@ -6,7 +6,6 @@ import numpy as np
 
 #   White backgrounds are for losers    #
 plt.style.use('dark_background')
-
 ###     Question 2    ####
 
 #   Variable
@@ -68,9 +67,40 @@ plt.grid()
 
 l_real = 3.85e33
 luminosity = 0
+
 ## This sums the energy each shell creates to get total luminosity
 for i in range(r.size):
     luminosity += Q[i]
 
 print("The total luminosity we calculate is: ",luminosity, "This is ",l_real - luminosity, "less then the real value." )
 
+## Showing the inner 25% is 99% of the total energy
+
+## 99% of the total luminosity 
+lum99 = luminosity * .99
+lum = 0
+flag = False
+point = 0
+
+##  Will do basically the same thing here but once we reach 99% 
+##  of total luminosity I print the percent of the total volume at that point.
+for i in range(r.size):
+    if lum >= lum99 and flag == False:
+        print("99% of the total luminosity is created within the inner ",volume[i]/volume[-1]*100, "of the volume")
+        point = i
+        flag = True
+        
+        
+    lum += Q[i]
+
+plt.figure("2(b)")
+plt.plot(r[point], Q[point],"ro", label= "99% of the total luminosity")
+plt.legend()
+
+
+#plt.figure("Volume")
+#plt.plot(r, volume)
+#plt.fill_between(r, volume, color='blue', alpha=.1)
+#plt.axvline(r[point], color ='b')
+#plt.plot(r[point], volume[point],"ro")
+plt.show()
