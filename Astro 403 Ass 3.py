@@ -7,7 +7,7 @@ import numpy as np
 #   White backgrounds are for losers    #
 plt.style.use('dark_background')
 
-###     Question 3    ####
+###     Question 2    ####
 
 #   Variable
 r = np.arange(0,0.6, 0.01)
@@ -28,6 +28,8 @@ q = 2.54e6 * X**2 * rho * T**(-2/3) * np.exp(-33.81/T**(1/3))
 drop = False
 q_0 = q[0]*10**-3
 
+plt.figure("2(a)")
+
 for i in  range(r.size):
     if q[i] < q_0 and drop == False:
         print("Dropped three orders of magnitudes at: ", r[i],q[i])
@@ -35,10 +37,40 @@ for i in  range(r.size):
         drop = True
 
 ## !PLOTING IS FUN! ## (SNORTS 3 lbs of coke) why is this not working
-
 plt.plot(r,q,'g-')
 plt.grid()
 plt.legend()
 plt.xlabel("Solar Radius")
 plt.ylabel("q whatever that is")
-plt.show()
+
+
+##   2b   ##
+### Each shell has a constant density and that each shell is a thickness of .01
+
+##  Constants or whatever
+# Volume of shell at each position 
+rcm = r * 695700 * 100000
+volume = []
+for i in range(60):
+    if i ==0:
+        volume.append(4/3 * np.pi * rcm[0]**3)
+    else:
+        volume.append(4/3 * np.pi * (rcm[i]**3-rcm[i-1]**3))
+
+Q = q*volume*rho
+
+plt.figure("2(b)")
+plt.plot(r, Q, "g")
+plt.xlabel("Radius of Shell (cm)")
+plt.ylabel("Total Energy in Shell (ergs/s)")
+plt.grid()
+
+
+l_real = 3.85e33
+luminosity = 0
+## This sums the energy each shell creates to get total luminosity
+for i in range(r.size):
+    luminosity += Q[i]
+
+print("The total luminosity we calculate is: ",luminosity, "This is ",l_real - luminosity, "less then the real value." )
+
