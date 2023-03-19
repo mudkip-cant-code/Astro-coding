@@ -1,4 +1,6 @@
 ##Astro 403 Ass 3
+##I dont like to comment am lazy
+#Imports 
 import matplotlib.pyplot as plt 
 import numpy as np
 
@@ -34,7 +36,7 @@ for i in  range(r.size):
 
 ## !PLOTING IS FUN! ## (SNORTS 3 lbs of coke) why is this not working
 
-plt.plot(r,q,'b-')
+plt.plot(r,q,'g-')
 plt.grid()
 plt.legend()
 plt.xlabel("Solar Radius")
