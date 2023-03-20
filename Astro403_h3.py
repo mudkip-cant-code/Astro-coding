@@ -96,28 +96,51 @@ for i in range(r.size):
 plt.figure("2(b)")
 plt.plot(r[point], Q[point],"ro", label= "99% of the total luminosity")
 plt.legend()
-#plt.show()
 
 
 ##      Question 3      ##
 
 ### JUST SOLVE THE LANE EMDEN EQUATION ###
 
-gama_a = 5/3
-gama_s = 1.303
-
 #Step (bro what are you doing)
-dxi = .0001
+dxi = .001
 steps = 10000
-n = [1.5,1/.303]
+gamma = [1.5,1/.303]
+flag = True
 
-for i in range(2):
-    xi = 0
+#Loops for both values of n
+#The inner loop iterates over values of theta and xi
+plt.figure("Q3")
+
+for i in gamma:
+    xi = 0.001
     theta = 1
     diff = 0                            #The differential in paranthesis
-    theta_list = np.empty(steps)
-    xi_list = np.empty(steps)
-
-    for i in range(steps):
-        diff += xi**2 * theta
+    theta_list = []
+    xi_list = []
+    flag = True
+    j = 0
+    
+    while flag == True:
+                  
+        diff += -xi**2 * theta**i * dxi 
+        theta += diff/xi**2 * dxi
+        xi += dxi
+        theta_list.append(theta)
+        xi_list.append(xi)
         
+        if np.real(theta_list[j]) < 0 <= np.real(theta_list[j-1]) and flag == True:
+            plt.plot(xi,theta ,"ro")
+            print(j)
+            print(theta_list[j])
+            flag = False
+            
+        j += 1
+
+
+    plotlabel = "gamma = " + str(np.round(gamma,4))        
+    plt.plot(xi_list, theta_list, label = plotlabel)
+    
+plt.legend()
+plt.grid()
+plt.show()
