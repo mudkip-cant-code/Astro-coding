@@ -17,3 +17,4 @@ ax.set_ylabel('y-axis')
 ax.set_title("'dark_background' style sheet")
 
 plt.show()
+

@@ -96,11 +96,28 @@ for i in range(r.size):
 plt.figure("2(b)")
 plt.plot(r[point], Q[point],"ro", label= "99% of the total luminosity")
 plt.legend()
+#plt.show()
 
 
-#plt.figure("Volume")
-#plt.plot(r, volume)
-#plt.fill_between(r, volume, color='blue', alpha=.1)
-#plt.axvline(r[point], color ='b')
-#plt.plot(r[point], volume[point],"ro")
-plt.show()
+##      Question 3      ##
+
+### JUST SOLVE THE LANE EMDEN EQUATION ###
+
+gama_a = 5/3
+gama_s = 1.303
+
+#Step (bro what are you doing)
+dxi = .0001
+steps = 10000
+n = [1.5,1/.303]
+
+for i in range(2):
+    xi = 0
+    theta = 1
+    diff = 0                            #The differential in paranthesis
+    theta_list = np.empty(steps)
+    xi_list = np.empty(steps)
+
+    for i in range(steps):
+        diff += xi**2 * theta
+        
