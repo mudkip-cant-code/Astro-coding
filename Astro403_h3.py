@@ -40,13 +40,13 @@ plt.plot(r,q,'g-')
 plt.grid()
 plt.legend()
 plt.xlabel("Solar Radius")
-plt.ylabel("q whatever that is")
+plt.ylabel("q (ergs/s/g)")
 
 
 ##   2b   ##
 ### Each shell has a constant density and that each shell is a thickness of .01
 
-##  Constants or whatever
+##  Constants
 # Volume of shell at each position 
 rcm = r * 695700 * 100000
 volume = []
@@ -56,7 +56,7 @@ for i in range(60):
     else:
         volume.append(4/3 * np.pi * (rcm[i]**3-rcm[i-1]**3))
 
-Q = q*volume*rho
+Q = q * volume * rho
 
 plt.figure("2(b)")
 plt.plot(r, Q, "g")
@@ -100,9 +100,7 @@ plt.legend()
 
 ##      Question 3      ##
 
-### JUST SOLVE THE LANE EMDEN EQUATION ###
-
-#Step (bro what are you doing)
+#Initialize
 dxi = .001
 steps = 10000
 gamma = [1.5,1/.303]
@@ -129,18 +127,28 @@ for i in gamma:
         theta_list.append(theta)
         xi_list.append(xi)
         
-        if np.real(theta_list[j]) < 0 <= np.real(theta_list[j-1]) and flag == True:
+        if np.real(theta_list[j]) < 0  and flag == True:
             plt.plot(xi,theta ,"ro")
             print(j)
             print(theta_list[j])
             flag = False
-            
+            print(diff/xi**2)
+            ## Central pressure and density calculations 
+            M_n = -diff
+            D_n = (- 3* diff / xi ** 3) ** (-1)
+            B_n = D_n ** (1/i-1/3) / (i+1) * (1/M_n) **((i-1)/i) * (1/xi) ** ((3-i) / i)
+            rho_c = D_n * 1.989e30 / (4/3 * np.pi * 6.9634e8 ** 3)  
+            P_c = (4 * np.pi) ** (1/3) * 6.67e-11 * B_n * 1.989e30 ** (2/3) * rho_c ** (4/3)  
+            print("M_n = ", M_n ,"D_n = ", D_n ,"B_n :", B_n)
+            print("Central density = ", str(rho_c) + "kg/m^3, Central pressure = ", str(P_c) + "Pa, for gamma = ", str(np.round(i,4)))
         j += 1
 
-
-    plotlabel = "gamma = " + str(np.round(gamma,4))        
+    print(xi_list[-1],theta_list[-1])
+    plotlabel = "gamma = " + str(np.round(i,4))        
     plt.plot(xi_list, theta_list, label = plotlabel)
     
 plt.legend()
+plt.xlabel("xi")
+plt.ylabel("theta")
 plt.grid()
 plt.show()
