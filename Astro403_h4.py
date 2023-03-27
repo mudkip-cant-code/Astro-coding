@@ -12,9 +12,14 @@ os.chdir("/Users/jonthanwarkentin/Desktop")
 plt.style.use('dark_background')
 
 ## Reads the csv file and drops all the empty values ##
-df = pd.read_csv('datahw4.csv', header=[0,1], skip_blank_lines = True)
-array = df.dropna()
 
+df = pd.read_csv('datahw4.csv', header=[0,1])
+
+#array = pd.read_csv('datahw4.csv', header=[0,1] )
+#array3 = pd.read_csv('datahw4.csv', header=[0,1] )
+
+array = df
+#print(array)
 ## Constant ##
 fuck = 5.7e9
 
@@ -29,8 +34,8 @@ rho1 = array.iloc[:,0]
 Penis = fuck * (10 ** rho1)**(4/3)
 
 ## Slope thingy
-p1 = np.polyfit(x= array.iloc[:,0], y = array.iloc[:, 1], deg =1)  
-print("The fitted slope of the line is: ",p1)
+#p1 = np.polyfit(x= array.iloc[:,0], y = array.iloc[:, 1], deg =1)  
+#print("The fitted slope of the line is: ",p1)
 
 #Plotting
 plt.figure("Photosphere")
@@ -40,16 +45,15 @@ plt.xlabel(axis_list[0])
 plt.ylabel(axis_list[1]) 
 plt.legend()
 plt.title("Photosphere")
-
-
+plt.show()
 
 ## Plot 2 ##
 
 rho2 = array.iloc[:,2]
 Penis2 = fuck * (10 ** rho2)**(4/3)
 
-p2 = np.polyfit(x= array.iloc[:,2], y = array.iloc[:, 3], deg =1)  
-print("The fitted slope of the line is: ",p2)
+#p2 = np.polyfit(x= array.iloc[:,2], y = array.iloc[:, 3], deg =1)  
+#print("The fitted slope of the line is: ",p2)
 
 #Plotting
 plt.figure("Envelope")
@@ -60,14 +64,13 @@ plt.ylabel(axis_list[3])
 plt.title("Envelope")
 
 
-
 ## Plot 3 ##
 
 rho3 = array.iloc[:,4]
 Penis3 = fuck * (10 ** rho3)**(4/3)
 
-p3 = np.polyfit(x= array.iloc[:,4], y = array.iloc[:, 5], deg =1)  
-print("The fitted slope of the line is: ",p3)
+#p3 = np.polyfit(x= array.iloc[:,4], y = array.iloc[:, 5], deg =1)  
+#print("The fitted slope of the line is: ",p3)
 
 #Plotting
 plt.figure("Core")
