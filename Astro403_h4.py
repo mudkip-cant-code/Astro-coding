@@ -14,11 +14,8 @@ plt.style.use('dark_background')
 ## Reads the csv file and drops all the empty values ##
 
 df = pd.read_csv('datahw4.csv', header=[0,1])
-
-#array = pd.read_csv('datahw4.csv', header=[0,1] )
-#array3 = pd.read_csv('datahw4.csv', header=[0,1] )
-
 array = df
+
 #print(array)
 ## Constant ##
 fuck = 5.7e9
@@ -34,8 +31,26 @@ rho1 = array.iloc[:,0]
 Penis = fuck * (10 ** rho1)**(4/3)
 
 ## Slope thingy
-#p1 = np.polyfit(x= array.iloc[:,0], y = array.iloc[:, 1], deg =1)  
-#print("The fitted slope of the line is: ",p1)
+def error(arg):
+    if type(arg) == float and pd.isna(arg) == False:
+        return arg
+
+nlist1 = []
+
+for i in array.iloc[:,0]:
+    nlist1.append(error(i))
+
+nlist1.remove("None")
+print(nlist1)
+nlist2= []
+for i in array.iloc[:,1]:
+    nlist2.append(error(i))
+
+print(nlist1)
+
+
+p1 = np.polyfit(nlist1, nlist2, deg =1)  
+print("The fitted slope of the line is: ",p1)
 
 #Plotting
 plt.figure("Photosphere")
