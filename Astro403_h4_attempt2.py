@@ -60,6 +60,23 @@ print("SLope thingy ma bob:", np.polyfit( df_Ph['logRho'],np.log10(Penis) ,deg =
 print("Density,end :",10**df_Ph['logRho'][0],"Pressure, end:",10**df_Ph['logP'][0])
 print("Density, begining:",10**df_Ph['logRho'][279],"Pressure, core:",10**df_Ph['logP'][279])
 
+
+##PART B
+#Constants 
+rho_top = 10**df_Ph['logRho'][0]
+P_top = 10**df_Ph['logP'][0]
+rho_bot = 10**df_Ph['logRho'][279]
+P_bot = 10**df_Ph['logP'][279]
+
+G = 6.67e-11
+Rsun = 6.96e8
+Msun = 1.989e30
+a = .1
+
+print("Our mixing length at the bot is:  ", a*P_bot*(.65*Rsun)**2/(rho_bot*G*Msun*.97))
+print("Our mixing length at the top is:  ", a*P_top*(.999*Rsun)**2/(rho_top*G*Msun))
+
+
 ## Core
 name = 'Core'
 print(name)
